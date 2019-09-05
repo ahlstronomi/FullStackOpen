@@ -16,13 +16,46 @@ const Statistics = (props) => {
   const neutrals = props.neutrals
   const bads = props.bads
 
+  const calculateAvg = () => {
+      const result = (goods + -bads) / (goods + neutrals + bads)
+      return result
+  }
+
+  if(goods > 0 || neutrals > 0 || bads > 0) {
+    return(
+      <>
+        <table>
+          <tr>
+            <td>good</td>
+            <td>{goods}</td>
+          </tr>
+          <tr>
+            <td>neutral</td>
+            <td>{neutrals}</td>
+          </tr>
+          <tr>
+            <td>bad</td>
+            <td>{bads}</td>
+          </tr>
+          <tr>
+            <td>All</td>
+            <td>{goods + neutrals + bads}</td>
+          </tr>
+          <tr>
+            <td>Avg</td>
+            <td>{calculateAvg()}</td>
+          </tr>
+        </table>
+      </>
+    )
+  }
+
   return(
     <>
-      <p>good {goods}</p>
-      <p>neutral {neutrals}</p>
-      <p>bad {bads}</p>
+    <p>No feedback given</p>
     </>
   )
+  
 }
 
 const App = () => {
