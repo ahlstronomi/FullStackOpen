@@ -1,10 +1,7 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
-const Button = (props) => {
-  const onClick = props.onClick
-  const text = props.text
-
+const Button = ({onClick, text}) => {
   return (
     <>
       <button onClick={onClick}>{text}</button>
@@ -13,7 +10,7 @@ const Button = (props) => {
 
 }
 
-const App = (props) => {
+const App = ({anecdotes}) => {
   const [selected, setSelected] = useState(0)
   const [votes, setVotes] = useState(new Array(6).fill(0))
 
@@ -37,7 +34,7 @@ const App = (props) => {
   return (
     <div>
       <h1>Anecdote of the Day</h1>
-      <p>{props.anecdotes[selected]}</p>
+      <p>{anecdotes[selected]}</p>
       <p>has {votes[selected]} votes</p>
       <Button onClick={changeTheAnecdote} text="New anecdote" />
       <Button onClick={voteAnecdote} text="Vote" />
