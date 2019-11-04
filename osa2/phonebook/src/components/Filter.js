@@ -1,8 +1,13 @@
 import React from 'react'
 
-const Filter = ({ person }) => {
+const Filter = ({ action, value }) => {
   return (
-    <li>{person.name} {person.number}</li>
+    <div>
+      Filter:
+      <input
+        value={value}
+        onChange={action} />
+    </div>
   )
 }
 

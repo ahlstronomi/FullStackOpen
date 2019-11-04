@@ -1,8 +1,10 @@
 import React from 'react'
 
-const Persons = ({ person }) => {
+const Persons = ({ listElementCreator }) => {
   return (
-    <li>{person.name} {person.number}</li>
+    <ul>
+    {listElementCreator}
+  </ul>
   )
 }
 

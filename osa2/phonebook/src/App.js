@@ -1,12 +1,24 @@
 import React, { useState } from 'react'
-import { notStrictEqual } from 'assert'
 import Person from './components/Person'
+import Filter from './components/Filter'
+import PersonForm from './components/PersonForm'
+import Persons from './components/Persons'
 
 const App = () => {
   const [persons, setPersons] = useState([
     {
       name: 'Arto Hellas',
-      number: '0440000000'
+      number: '0440000000',
+      id: 1
+    },
+    {
+      name: 'Kalle Bellas',
+      number: '0440000000',
+      id: 2
+    },    {
+      name: 'Jorma Cellas',
+      number: '0440000000',
+      id: 3
     }
   ])
   const [newName, setNewName] = useState('')
@@ -15,8 +27,8 @@ const App = () => {
   const [showAll, setShowAll] = useState(true)
 
   const personsToShow = showAll
-  ? persons
-  : persons.filter(person => person.name.includes(filterTerm))
+    ? persons
+    : persons.filter(person => person.name.includes(filterTerm))
 
 
   const resetForm = () => {
@@ -41,66 +53,48 @@ const App = () => {
         resetForm()
       }
     })
-
   }
 
   const handleNameChange = (event) => {
-    console.log(event.target.value)
     setNewName(event.target.value)
   }
 
   const handleNumberChange = (event) => {
-    console.log(event.target.value)
     setNewNumber(event.target.value)
   }
 
   const handleFilterTermChange = (event) => {
     setFilterTerm(event.target.value)
-    if(filterTerm === '') {
+    if (filterTerm === '') {
       setShowAll(true)
     } else {
       setShowAll(false)
     }
   }
 
-  const rows = () => 
+  const rows = () =>
     personsToShow.map(person =>
       <Person
-        key={person.id}
-        person={person} />
+        person={person}
+        key={person.id} />
     )
 
   return (
     <div>
       <h2>Phonebook</h2>
-      <div>
-          Filter: <input
-            value={filterTerm}
-            onChange={handleFilterTermChange} />
-        </div>
-
-        <h2>Add Contact</h2>
-      <form onSubmit={addPerson}>
-        <div>
-          name: <input
-            value={newName}
-            onChange={handleNameChange} />
-        </div>
-        <div>number: <input
-          value={newNumber}
-          onChange={handleNumberChange} /></div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
+      <Filter
+        value={filterTerm}
+        action={handleFilterTermChange} />
+      <h2>Add Contact</h2>
+      <PersonForm onSubmit={addPerson}
+        nameValue={newName}
+        nameOnChange={handleNameChange}
+        numberValue={newNumber}
+        numberOnChange={handleNumberChange} />
       <h2>Numbers</h2>
-      <ul>
-        {rows()}
-      </ul>
-
+      <Persons listElementCreator={rows()}/>
     </div>
   )
-
 }
 
 export default App

@@ -1,8 +1,20 @@
 import React from 'react'
 
-const PersonForm = ({ person }) => {
+const PersonForm = ({ onSubmit, nameValue, nameOnChange, numberValue, numberOnChange }) => {
   return (
-    <li>{person.name} {person.number}</li>
+    <form onSubmit={onSubmit}>
+        <div>
+          name: <input
+            value={nameValue}
+            onChange={nameOnChange} />
+        </div>
+        <div>number: <input
+          value={numberValue}
+          onChange={numberOnChange} /></div>
+        <div>
+          <button type="submit">add</button>
+        </div>
+      </form>
   )
 }
 
